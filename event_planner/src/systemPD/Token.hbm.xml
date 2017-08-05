@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2017 1:50:20 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="eventPD.Token" table="token" catalog="event_planner" optimistic-lock="version">
+        <id name="tokenId" type="java.lang.Integer">
+            <column name="token_id" />
+            <generator class="identity" />
+        </id>
+        <property name="token" type="string">
+            <column name="token" length="100" not-null="true" />
+        </property>
+        <property name="tokenExpire" type="date">
+            <column name="token_expire" length="10" not-null="true" />
+        </property>
+        <property name="userId" type="int">
+            <column name="user_id" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

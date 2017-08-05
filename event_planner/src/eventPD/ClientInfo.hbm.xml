@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 28, 2017 6:32:55 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="ClientInfo" table="client_info" catalog="event_planner" optimistic-lock="version">
+        <id name="clientId" type="java.lang.Integer">
+            <column name="client_id" />
+            <generator class="identity" />
+        </id>
+        <property name="clientName" type="string">
+            <column name="client_name" length="100" not-null="true" />
+        </property>
+        <property name="clientAddress" type="string">
+            <column name="client_address" length="100" not-null="true" />
+        </property>
+        <property name="clientPhone" type="string">
+            <column name="client_phone" length="100" not-null="true" />
+        </property>
+        <property name="clientEmail" type="string">
+            <column name="client_email" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

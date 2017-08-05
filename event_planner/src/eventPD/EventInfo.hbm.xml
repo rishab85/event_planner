@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 29, 2017 7:13:10 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="EventInfo" table="event_info" catalog="event_planner" optimistic-lock="version">
+        <id name="eventId" type="java.lang.Integer">
+            <column name="event_id" />
+            <generator class="identity" />
+        </id>
+        <property name="eventName" type="string">
+            <column name="event_name" length="50" not-null="true" />
+        </property>
+        <property name="eventDate" type="date">
+            <column name="event_date" length="10" not-null="true" />
+        </property>
+        <property name="eventVenue" type="string">
+            <column name="event_venue" length="100" not-null="true" />
+        </property>
+        <property name="eventGuestsize" type="int">
+            <column name="event_guestsize" not-null="true" />
+        </property>
+        <property name="eventTablesize" type="int">
+            <column name="event_tablesize" not-null="true" />
+        </property>
+        <property name="userId" type="int">
+            <column name="user_id" not-null="true" />
+        </property>
+        <property name="eventEmptytable" type="int">
+            <column name="event_emptytable" not-null="true" />
+        </property>
+        <property name="clientId" type="int">
+            <column name="client_id" not-null="true" />
+        </property>
+        <property name="eventCompleted" type="int">
+            <column name="event_completed" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
