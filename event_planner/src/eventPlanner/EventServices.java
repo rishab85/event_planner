@@ -138,13 +138,9 @@ public class EventServices {
 		
 		@Secured
 		   @PUT
-		   @Path("/eventinfo/completed/{id}")
-		   @Produces(MediaType.APPLICATION_JSON)
-		   @Consumes(MediaType.APPLICATION_JSON)
-		   public Response udpatedCompleted(EventInfo event,@PathParam("id") String id, @Context final HttpServletResponse response) throws IOException{
-			 if(event==null){
-				 return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-			 }else{
+		   @Path("/markcomplete/{id}")
+		   public Response udpatedCompleted(@PathParam("id") String id, @Context final HttpServletResponse response) throws IOException{
+
 				 EventInfo old = eventInfoDAO.geteventinfByID(Integer.parseInt(id));
 				 
 				 old.setEventCompleted(1);
@@ -156,7 +152,6 @@ public class EventServices {
 					s.clear();
 					tx.commit();
 					s.close();
-			 }
 			 return Response.status(Response.Status.OK).build();
 			 
 		 }

@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.Cascade;
+
 import com.owlike.genson.annotation.JsonIgnore;
 
 /**
@@ -99,7 +101,8 @@ public class ClientInfo implements java.io.Serializable {
 	}
 	
 	@XmlTransient
-	@OneToMany(mappedBy = "clientinfo")
+//	@OneToMany(mappedBy = "clientinfo")
+	@OneToMany(mappedBy = "clientinfo", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Collection<EventInfo> getEventinfo() {
 		return eventinfo;
 	}

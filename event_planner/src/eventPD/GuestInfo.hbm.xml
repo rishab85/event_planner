@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2017 11:25:19 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="GuestInfo" table="guest_info" catalog="event_planner" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="guestFname" type="string">
+            <column name="guest_fname" length="50" not-null="true" />
+        </property>
+        <property name="tableAssigned" type="int">
+            <column name="table_assigned" not-null="true" />
+        </property>
+        <property name="eventId" type="int">
+            <column name="event_id" not-null="true" />
+        </property>
+        <property name="guestId" type="int">
+            <column name="guest_id" not-null="true" />
+        </property>
+        <property name="guestLname" type="string">
+            <column name="guest_lname" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

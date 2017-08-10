@@ -10,5 +10,8 @@
   <mapping class="systemPD.Token"/>
   <mapping class="eventPD.EventInfo"/>
   <mapping class="eventPD.ClientInfo"/>
+  <mapping class="eventPD.GuestInfo"/>
+  <mapping class="eventPD.NotseatWith"/>
+  <mapping class="eventPD.SeatWith"/>
  </session-factory>
 </hibernate-configuration>

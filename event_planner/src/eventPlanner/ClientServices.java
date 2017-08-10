@@ -57,7 +57,9 @@ public class ClientServices {
 			SessionFactory sf = HibernateUtil.getSessionFactory();
 			Session s = sf.openSession();
 			Transaction tx = s.beginTransaction();
+			System.out.print(client.getEventinfo());
 			s.save(client);
+			
 			s.flush();
 			s.clear();
 			tx.commit();
