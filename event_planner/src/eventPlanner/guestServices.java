@@ -144,6 +144,13 @@ public class guestServices {
 	}
 	
 	@GET
+	@Path("/guestbytable/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<GuestInfo> getAllGuestbytable(@PathParam("id") String id){
+		return guestDAO.getAllGuestByTable(Integer.parseInt(id));
+	}
+	
+	@GET
 	@Path("/guestnot")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<NotseatWith> getAllGuestnot(@QueryParam("event_id") String eventId,
