@@ -47,7 +47,7 @@ public class NotseatWith implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "guest_jd", nullable = false)
+	@Column(name = "guest_id", nullable = false)
 	public int getGuestJd() {
 		return this.guestJd;
 	}
@@ -77,7 +77,7 @@ public class NotseatWith implements java.io.Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="guest_id",  insertable=false, updatable=false, nullable=false)
+	@JoinColumn(name="guest_id", referencedColumnName = "guest_id", insertable=false, updatable=false, nullable=false)
 	public GuestInfo getGuest() {
 		return guest;
 	}
