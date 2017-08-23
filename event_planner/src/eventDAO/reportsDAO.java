@@ -70,7 +70,7 @@ public class reportsDAO {
 			tbl.addCell(myCell1);
 			
 			PdfPCell myCell2 = new PdfPCell(new Phrase(String.valueOf(glist.get(i).getTableAssigned()), regular));
-			myCell1.setPadding(10);
+			myCell2.setPadding(10);
 			tbl.addCell(myCell2);
 		}
         // step 3

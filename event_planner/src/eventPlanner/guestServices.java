@@ -30,6 +30,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import algorithm.algorithm;
 import algorithm.population;
 import eventDAO.HibernateUtil;
 import eventDAO.guestDAO;
@@ -46,6 +47,7 @@ public class guestServices {
 
 	}
 	
+	@Secured
 	@POST
 	@Path("/guest")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -69,7 +71,7 @@ public class guestServices {
 		
 	}
 	
-	
+	@Secured
 	@PUT
 	@Path("/guest/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -99,6 +101,7 @@ public class guestServices {
 		
 	}
 	
+	@Secured
 	@GET
 	@Path("/guestinfo/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -109,6 +112,7 @@ public class guestServices {
 	}
 	
 	
+	@Secured
 	@DELETE
 	@Path("/deleteguest/{id}")
 	public Response deleteAll(@PathParam("id") String id){
@@ -123,6 +127,7 @@ public class guestServices {
 		}
 	}
 	
+	@Secured
 	@DELETE
 	@Path("/deleteselectedguest/{id}")
 	public Response deleteselectedGuest(@PathParam("id") String id){
@@ -136,6 +141,7 @@ public class guestServices {
 		}
 	}
 	
+	@Secured
 	@GET
 	@Path("/guest/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -143,6 +149,7 @@ public class guestServices {
 		return guestDAO.getAllGuest(Integer.parseInt(id));
 	}
 	
+	@Secured
 	@GET
 	@Path("/guestbytable/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -150,6 +157,7 @@ public class guestServices {
 		return guestDAO.getAllGuestByTable(Integer.parseInt(id));
 	}
 	
+	@Secured
 	@GET
 	@Path("/guestnot")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -158,6 +166,7 @@ public class guestServices {
 		return guestDAO.getAllGuestnot(Integer.parseInt(eventId),Integer.parseInt(guestId) );
 	}
 	
+	@Secured
 	@GET
 	@Path("/guestseat")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -166,6 +175,7 @@ public class guestServices {
 		return guestDAO.getAllGuestseat(Integer.parseInt(eventId),Integer.parseInt(guestId) );
 	}
 	
+	@Secured
 	@PUT
 	@Path("/switchseat")
 	public void swithchSeat(@QueryParam("guest_id") String guest_id,
@@ -193,11 +203,11 @@ public class guestServices {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response test(@QueryParam("event_id") String eventId,
 			@QueryParam("guest_id") String guestId){
-		population pop = new population();
-		pop.generatePopulation(42);
+		algorithm algor = new algorithm();
 		return Response.status(200).build();
 	}
 	
+	@Secured
 	@POST
 	@Path("/import/{id}")
 	@Produces(MediaType.MULTIPART_FORM_DATA)
@@ -327,9 +337,4 @@ public class guestServices {
 			e.printStackTrace();
 		}
 	}
-
-	
-	
-	
-
 }

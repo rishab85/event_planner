@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -27,46 +28,46 @@ public class reportServices {
 
 	private static final String FILE_PATH = "C:\\Users\\risha\\Downloads\\eclipse-java-mars-2-win32-x86_64\\eclipse\\guestlist.pdf";
 	@GET
-	@Path("/report")
+	@Path("/report/{id}")
 	@Produces("application/pdf")
-	public Response getAllGuestseat() throws FileNotFoundException, DocumentException{
+	public Response getAllGuestseat(@PathParam("id") String id) throws FileNotFoundException, DocumentException{
 		reportsDAO report = new reportsDAO();
-		report.createPDF(42);
+		report.createPDF(Integer.parseInt(id));
 		File file = new File(FILE_PATH);
 
 		ResponseBuilder response = Response.ok((Object) file);
 		response.header("Content-Disposition",
-				"attachment; filename=new-android-book.pdf");
+				"attachment; filename=report-by-person.pdf");
 		return response.build();
 	}
 	
 	private static final String FILE_PATH_BYTABLE = "C:\\Users\\risha\\Downloads\\guestlistbytable.pdf";
 	@GET
-	@Path("/reportbytable")
+	@Path("/reportbytable/{id}")
 	@Produces("application/pdf")
-	public Response getAllGuestByTable() throws FileNotFoundException, DocumentException{
+	public Response getAllGuestByTable(@PathParam("id") String id) throws FileNotFoundException, DocumentException{
 		reportsDAO report = new reportsDAO();
-		report.createPDFByTable(42);
+		report.createPDFByTable(Integer.parseInt(id));
 		File file = new File(FILE_PATH_BYTABLE);
 
 		ResponseBuilder response = Response.ok((Object) file);
 		response.header("Content-Disposition",
-				"attachment; filename=new-android-book.pdf");
+				"attachment; filename=report-by-table.pdf");
 		return response.build();
 	}
 	
 	private static final String FILE_PATH_PLACECARD = "C:\\Users\\risha\\Downloads\\placecard.pdf";
 	@GET
-	@Path("/placecard")
+	@Path("/placecard/{id}")
 	@Produces("application/pdf")
-	public Response getAllPlacecard() throws FileNotFoundException, DocumentException{
+	public Response getAllPlacecard(@PathParam("id") String id) throws FileNotFoundException, DocumentException{
 		reportsDAO report = new reportsDAO();
-		report.createPlacecard(42);;
+		report.createPlacecard(Integer.parseInt(id));;
 		File file = new File(FILE_PATH_PLACECARD);
 
 		ResponseBuilder response = Response.ok((Object) file);
 		response.header("Content-Disposition",
-				"attachment; filename=new-android-book.pdf");
+				"attachment; filename=placecard.pdf");
 		return response.build();
 	}
 }
