@@ -15,15 +15,30 @@ public class crossover {
 	}
 
 	
-	public ArrayList<ArrayList<GuestInfo>> crossOverPop(ArrayList<ArrayList<GuestInfo>> pop, ArrayList<Integer> fitness){
+	public ArrayList<ArrayList<GuestInfo>> crossOverPop(ArrayList<ArrayList<GuestInfo>> pop, ArrayList<Integer> fitness, int ts){
+		
+		for(int i=0; i<3; i++){
+			int min = fitness.indexOf(Collections.min(fitness));
+			pop.remove(min);
+			fitness.remove(min);
+		}
+		
+		
+//		ArrayList<GuestInfo> replacepop = new ArrayList<GuestInfo>();
+//		for (GuestInfo point : pop.get(fitness.indexOf(Collections.max(fitness)))) {
+//		    replacepop.add(point);
+//		}
+//		
+//		pop.add(replacepop);
+		
+		
 		ArrayList<Integer> picker = new ArrayList<Integer>();
 		
 		int count = 0;
-		System.out.println("Fitness sizee " + fitness.size());
 		int max = 0;
 		int maxindex = 0;
-		int second = 0;
-		int secondindex = 0;
+		int second = 0, third=0;
+		int secondindex = 0,thirdindex=0;
 		for(int i=0; i<fitness.size(); i++){
 			int check = 0;
 			for(int j=0; j<fitness.get(i); j++){
@@ -37,31 +52,34 @@ public class crossover {
 				max=check;
 				maxindex = i;
 			}else if(check>second){
+				third = second;
+				thirdindex = secondindex;	
 				second=check;
 				secondindex = i;
+			}else if(check>third){
+				third = check;
+				thirdindex = i;
 			}
 		}
-		
-		
-		System.out.println(maxindex + " " + secondindex);
-		
+	
 		maxfitness maxfit = new maxfitness();
 		maxfit.setGuest(pop.get(maxindex));
 		
 		ArrayList<GuestInfo> test = new ArrayList<GuestInfo>();
 		test = maxfit.getGuest();
-		System.out.println("---newgen");
-		for(int i=0; i<pop.size(); i++){
-			for(int j=0; j<pop.get(i).size(); j++){
-			System.out.println(pop.get(i).get(j).getGuestFname() + " " + pop.get(i).get(j).getTableAssigned());
-			}
-			System.out.println("---------");
-		}
+//		System.out.println("---newgen");
+//		for(int i=0; i<pop.size(); i++){
+//			for(int j=0; j<pop.get(i).size(); j++){
+//			System.out.println(pop.get(i).get(j).getGuestFname() + " " + pop.get(i).get(j).getTableAssigned());
+//			}
+//			System.out.println("---------");
+//		}
 		
-		System.out.println("Maxx -- ");
-		for(int j=0; j<pop.get(maxindex).size(); j++){
-			System.out.println(pop.get(maxindex).get(j).getGuestFname());
-		}
+		System.out.println("Maxx -- " + Collections.max(fitness));
+		
+//		for(int j=0; j<pop.get(maxindex).size(); j++){
+//			System.out.println(pop.get(maxindex).get(j).getGuestFname());
+//		}
 		
 		Integer[] ran = randomNumbers(picker.size()-1);
 		int half = pop.get(0).size()/2;
@@ -73,7 +91,19 @@ public class crossover {
 		    testpop.add(point);
 		}
 		
+		ArrayList<GuestInfo> testpop2 = new ArrayList<GuestInfo>();
+		for (GuestInfo point : pop.get(secondindex)) {
+		    testpop2.add(point);
+		}
+		
+		ArrayList<GuestInfo> testpop3 = new ArrayList<GuestInfo>();
+		for (GuestInfo point : pop.get(thirdindex)) {
+		    testpop3.add(point);
+		}
+		
 		newPop.add(testpop);
+		newPop.add(testpop2);
+		newPop.add(testpop3);
 //		newPop.add(pop.get(picker.get(secondindex)));
 		
 		for(int i=0; i<pop.size(); i++){
@@ -138,13 +168,16 @@ public class crossover {
 				}
 				
 			}
+			Random rann = new Random();
+			int ranindex=0;
 //			System.out.println("---------");
-			for(int m = 0; m<1; m++){
+			for(int m = 0; m<rann.nextInt(3); m++){
 			Random rand = new Random();
-			int random = rand.nextInt(child.size()-1);
-			int temp = child.get(random).getTableAssigned();
-			child.get(random).setTableAssigned(child.get(m).getTableAssigned());
-			child.get(m).setTableAssigned(temp);
+			Integer[] random = randomNumbers(child.size()-1);
+			int temp = child.get(random[ranindex]).getTableAssigned();
+			child.get(random[ranindex]).setTableAssigned(child.get(random[ranindex+1]).getTableAssigned());
+			child.get(random[ranindex+1]).setTableAssigned(temp);
+			ranindex++;
 			}
 //			Collections.swap(child, 0, random);
 			newPop.add(child);
@@ -162,7 +195,6 @@ public class crossover {
 			Collections.sort(newPop.get(i), new sortByTable());
 		}
 		
-		int ts = 6;
 		int checkcount = 0;
 		for(int i=0; i<newPop.size(); i++){
 			int tbl = 1;
@@ -187,7 +219,7 @@ public class crossover {
 		}
 		
 //		System.out.println(checkcount);
-		System.out.println("--start new gen");
+//		System.out.println("--start new gen");
 //		for(int i=0; i<newPop.size(); i++){
 //			for(int j=0; j<newPop.get(i).size(); j++){
 //			System.out.println(newPop.get(i).get(j).getGuestFname() + " " + newPop.get(i).get(j).getTableAssigned());

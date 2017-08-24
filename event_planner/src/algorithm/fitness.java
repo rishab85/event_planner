@@ -72,28 +72,24 @@ public class fitness {
 						for(int m = start; m<start+tablesize; m++){
 							
 							if(seat.contains(String.valueOf(guestinf.get(m).getGuestId()))){
-								//System.out.println("good" +" "+guestinf.get(l).getGuestFname() +" wants " +guestinf.get(m).getGuestFname());
+//								System.out.println("good" +" "+guestinf.get(l).getGuestFname() +" wants " +guestinf.get(m).getGuestFname());
 								iFitness++;
-								System.out.println("I am Here bro on one");
 							}else if(notseat.contains(String.valueOf(guestinf.get(m).getGuestId()))){
 //								System.out.println("Bad" +" "+guestinf.get(l).getGuestFname() +" doesnot wants " +guestinf.get(m).getGuestFname()+" "+ guestinf.get(l).getNotSeat());
-								System.out.println("bad bro");
+								iFitness--;
 								total++;
 							}else if(notseat.isEmpty()||notseat==null){
 //								temp++;
 								total++;
-								System.out.println("empty bro");
 							}else{
 //								System.out.println("Fair " +guestinf.get(m).getGuestFname()) ;
 								total++;
-								System.out.println("fair bro");
 							}
 							
 						}
 					}
 					j = j+(tablesize-1);
 					start = start+tablesize;
-					System.out.println("this is " + start);
 				}else{
 					for(int l=start; l<start+gs; l++){
 						List<String> seat = new ArrayList<String>();
@@ -104,24 +100,23 @@ public class fitness {
 						for(int m = start; m<start+gs; m++){
 							
 							if(seat.contains(String.valueOf(guestinf.get(m).getGuestId()))){
-//								System.out.println("good" +" "+guestinf.get(l).getGuestFname() +" wants " +guestinf.get(m).getGuestFname());
+	//							System.out.println("good" +" "+guestinf.get(l).getGuestFname() +" wants " +guestinf.get(m).getGuestFname());
 								iFitness++;
-								System.out.println("I am Here bro two");
+	//							System.out.println("I am Here bro two");
 								total++;
 							}else if(notseat.contains(String.valueOf(guestinf.get(m).getGuestId()))){
-//								System.out.println("Bad" +" "+guestinf.get(l).getGuestFname() +" doesnot wants " +guestinf.get(m).getGuestFname()+" "+ guestinf.get(l).getNotSeat());
+		//						System.out.println("Bad" +" "+guestinf.get(l).getGuestFname() +" doesnot wants " +guestinf.get(m).getGuestFname()+" "+ guestinf.get(l).getNotSeat());
 								iFitness--;
-								
 								total++;
 							}else if(notseat.isEmpty()||notseat==null){
 //								temp++;
 								total++;
-								System.out.println("I am Here bro three");
+//								System.out.println("I am Here bro three");
 							}else{
 //								System.out.println("Fair " +guestinf.get(m).getGuestFname()) ;
 //								temp++;
 								total++;
-								System.out.println("I am Here bro four");
+//								System.out.println("I am Here bro four");
 							}
 							j++;
 						}
@@ -129,7 +124,6 @@ public class fitness {
 				}
 				
 			}
-			System.out.println(iFitness + "---------");
 			fitness.add(iFitness);
 		}
 		return fitness;

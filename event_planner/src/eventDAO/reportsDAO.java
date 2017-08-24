@@ -154,6 +154,8 @@ public class reportsDAO {
 		doc.add(new Paragraph("Event Name : " + ef.getEventName(), header));
 		doc.add(new Paragraph("Event Date : " + ef.getEventDate(), regular));
 		doc.add(new Paragraph("Total Guest : " + glist.size(), regular));
+		doc.add(new Paragraph("Total Tables : " + glist.get(glist.size()-1).getTableAssigned(), regular));
+		doc.add(new Paragraph("Empty Tables : " + ef.getEventEmptytable(), regular));
 		
 		doc.add(new Paragraph(" "));
 		PdfPTable tbl = new PdfPTable(2);
@@ -177,7 +179,7 @@ public class reportsDAO {
 			cell.addElement(new Phrase("   "+" Table " + String.valueOf(currenttable), fontbold));
 			cell.addElement(new Phrase("       "));
 			if(gsize>=ef.getEventTablesize()){
-			for(int j=i; j<i+ef.getEventTablesize(); j++){
+			for(int j=i; j<i+gsize; j++){
 				
 				if(glist.get(j).getTableAssigned()==currenttable){
 					cell.addElement(new Phrase("       "+glist.get(j).getGuestFname() + " " + glist.get(j).getGuestLname(), regular));
@@ -188,7 +190,7 @@ public class reportsDAO {
 					System.out.println(i);
 				}else{
 					currenttable = glist.get(j).getTableAssigned();
-					i = i -1;
+					i--;
 					break;
 				}
 			}
@@ -205,6 +207,8 @@ public class reportsDAO {
 			cell.setFixedHeight(230);
 			tbl.addCell(cell);
 		}
+		PdfPCell cell2 = new PdfPCell();
+		tbl.addCell(cell2);
         // step 3
         // step 5
 		doc.add(tbl);

@@ -28,12 +28,12 @@ public class population {
 		Random rand = new Random();
 		guestDAO gu = new guestDAO();
 		EventInfo ef = new EventInfo();
-		ef = eventInfoDAO.geteventinfByID(42);
+		ef = eventInfoDAO.geteventinfByID(id);
 		int tableSize = ef.getEventTablesize();
 		int gs = 0;
 		int in = 0;
 		
-		guestinf = gu.getAllGuest(42);
+		guestinf = gu.getAllGuest(id);
 		String[] seat = guestinf.get(0).getSeatWith().split(",");
 		int totalTable = (guestinf.size()/ef.getEventTablesize())+1;
 		
@@ -73,11 +73,11 @@ public class population {
 //			System.out.println("---------------------------");
 //		}
 		
-		for(int i=0; i<100; i++){
+		for(int i=0; i<40; i++){
 			gs = guestinf.size();
 			int count = 1;
 			ArrayList<GuestInfo> gi = new ArrayList<GuestInfo>();
-			gi = gu.getAllGuest(42);
+			gi = gu.getAllGuest(id);
 			Collections.shuffle(gi);
 			for(int j=0; j<gi.size(); j++){
 				

@@ -33,7 +33,9 @@ import org.hibernate.Transaction;
 import algorithm.algorithm;
 import algorithm.population;
 import eventDAO.HibernateUtil;
+import eventDAO.eventInfoDAO;
 import eventDAO.guestDAO;
+import eventPD.EventInfo;
 import eventPD.GuestInfo;
 import eventPD.NotseatWith;
 import eventPD.SeatWith;
@@ -199,11 +201,10 @@ public class guestServices {
 	}
 	
 	@GET
-	@Path("/test")
+	@Path("/seatarrangement/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response test(@QueryParam("event_id") String eventId,
-			@QueryParam("guest_id") String guestId){
-		algorithm algor = new algorithm();
+	public Response test(@PathParam("id") String id){
+		algorithm algor = new algorithm(Integer.parseInt(id));
 		return Response.status(200).build();
 	}
 	
@@ -302,9 +303,19 @@ public class guestServices {
   				s.clear();
             }
             
+
+
+            
+            eventInfoDAO eve = new eventInfoDAO();
+            EventInfo eveinfo = eve.geteventinfByID(Integer.parseInt(id));
+            eveinfo.setEventGuestsize(count);
+            s.update(eveinfo);
+            s.flush();
+            s.clear();
             tx.commit();
             s.close();
-
+            
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
